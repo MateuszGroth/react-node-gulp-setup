@@ -1,0 +1,46 @@
+{
+  "name": "gulp-package",
+  "version": "1.0.0",
+  "description": "Gulp pack",
+  "main": "index.js",
+  "scripts": {
+    "watch": "gulp default",
+    "gulp": "gulp",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "browserify": "browserify"
+  },
+  "browserslist": [
+    "last 2 version",
+    "> 2%"
+  ],
+  "author": "Mateusz Groth",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
+    "@babel/preset-react": "^7.8.3",
+    "browser-sync": "^2.26.7",
+    "browserify": "^2.36.1",
+    "browserslist": "^4.7.2",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-babel": "^8.0.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-streamify": "^1.0.2",
+    "gulp-uglify": "^3.0.2",
+    "vinyl-source-stream": "^2.0.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.0.1",
+    "express": "^4.17.1",
+    "express-session": "^1.17.0",
+    "mongoose": "^5.8.11",
+    "passport": "^0.4.1",
+    "passport-local-mongoose": "^6.0.1",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  }
+}
