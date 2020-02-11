@@ -10,5 +10,5 @@ var _react = _interopRequireDefault(require("react"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function App() {
-  return _react.default.createElement("div", null, "Hello World!");
+  return _react.default.createElement("div", null, "Hello World! Testuje drugie");
 }
