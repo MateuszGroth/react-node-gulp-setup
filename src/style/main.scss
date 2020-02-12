@@ -1,0 +1,10 @@
+$bg: palevioletred;
+
+body {
+  background: $bg;
+
+  display: flex;
+  justify-content: space-evenly;
+
+  transform: translate(-1%);
+}

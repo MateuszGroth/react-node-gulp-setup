@@ -1,5 +1,5 @@
 import React from "react";
 
 export default function App() {
-  return <div>Hello World! Testuje drugie</div>;
+  return <div>Hello World! Testuje wszedł build</div>;
 }

@@ -1,2 +1,28 @@
 # react-node-gulp-setup
-React with node+express+ejs
+
+React with node+express+ejs using gulp
+
+### pros
+
+- style injection instead of realoading the browser
+- easy changes to `gulpfile.js`
+- uses browsersync
+
+### cons
+
+- has to create temporary js files to browserify them after
+- can not split js files into chunks to `lazy load` them after
+
+## Setup
+
+> start node server on first cmd
+
+```shell
+    node index.js
+```
+
+> start gulp on second cmd
+
+```shell
+    npm run gulp
+```

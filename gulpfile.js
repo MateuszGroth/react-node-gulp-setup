@@ -52,7 +52,7 @@ async function bundle() {
     .bundle()
     .pipe(source("bundle.js"))
     .pipe(streamify(uglify()))
-    .pipe(gulp.dest("./public/js"));
+    .pipe(gulp.dest("./public"));
 
   return new Promise(resolve => {
     stream.on("end", function() {
@@ -78,8 +78,9 @@ gulp.task("serve", () => {
     proxy: "localhost:3000"
   });
 
-  gulp.watch("./src/js/**/*.js", gulp.series(reload));
+  gulp.watch("./public/**/*.js", gulp.series(reload));
   gulp.watch("./views/**/*.ejs", gulp.series(reload));
+  gulp.watch(["./src/**/*.js", "./src/**/*.jsx"], gulp.series("compile-js"));
   gulp.watch("./src/style/**/*.scss", gulp.series("sass"));
 });
 
