@@ -1,14 +1,12 @@
-# react-node-gulp-setup
+# React with node+express+ejs using gulp
 
-React with node+express+ejs using gulp
-
-### pros
+### Pros
 
 - style injection instead of realoading the browser
 - easy changes to `gulpfile.js`
 - uses browsersync
 
-### cons
+### Cons
 
 - has to create temporary js files to browserify them after
 - can not split js files into chunks to `lazy load` them after
