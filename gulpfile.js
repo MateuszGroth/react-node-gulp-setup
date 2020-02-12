@@ -20,7 +20,16 @@ gulp.task("compile-js", async () => {
     .src(["./src/**/*.js", "./src/**/*.jsx"])
     .pipe(
       babel({
-        presets: ["@babel/preset-env", "@babel/preset-react"]
+        presets: [
+          [
+            "@babel/preset-env",
+            {
+              useBuiltIns: "usage",
+              corejs: "2"
+            }
+          ],
+          "@babel/preset-react"
+        ]
       })
     )
     .pipe(gulp.dest("./tmp"));
