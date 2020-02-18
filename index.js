@@ -34,7 +34,10 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect("mongodb://localhost:27017/userDB", { useNewUrlParser: true });
+mongoose.connect("mongodb://localhost:27017/userDB", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
 mongoose.set("useCreateIndex", true);
 
 const userSchema = new mongoose.Schema({
@@ -113,15 +116,25 @@ app.post("/login", function(req, res) {
     password: req.body.password
   });
 
+  console.log(user);
+
   req.login(user, function(err) {
     if (err) {
-      console.log(err);
+      res.redirect("/login");
     } else {
-      passport.authenticate("local")(req, res, function() {
-        res.redirect("/");
-      });
+      passport.authenticate("local", { failureRedirect: "/login" })(
+        req,
+        res,
+        function() {
+          res.redirect("/");
+        }
+      );
     }
   });
+});
+
+app.get("/login", function(req, res) {
+  res.render("login");
 });
 
 app.get("/logout", function(req, res) {
