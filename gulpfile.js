@@ -89,7 +89,7 @@ gulp.task("serve", () => {
   gulp.watch("./public/**/*.js", gulp.series(reload));
   gulp.watch("./views/**/*.ejs", gulp.series(reload));
   gulp.watch(["./src/**/*.js", "./src/**/*.jsx"], gulp.series("compile-js"));
-  gulp.watch("./src/style/**/*.scss", gulp.series("sass"));
+  gulp.watch("./src/**/*.scss", gulp.series("sass"));
 });
 
 gulp.task("default", gulp.parallel("serve"), done => {

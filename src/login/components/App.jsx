@@ -17,7 +17,9 @@ export default function App() {
         <input type="text" name="password" />
         <button type="submit">Submit</button>
       </form>
-      <button onClick={switchAction}>{action}</button>>
+      <button className="toggle" onClick={switchAction}>
+        {action}
+      </button>
     </div>
   );
 }

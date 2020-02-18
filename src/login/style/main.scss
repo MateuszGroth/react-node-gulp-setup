@@ -6,32 +6,59 @@ body {
   align-items: center;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 .container {
-  width: 50vh;
-  height: 50vw;
+  width: 60vh;
+  height: auto;
+  padding: 4rem 6rem;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
 
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 2px 3px -1px rgba(0, 0, 0, 0.35);
 
   form {
-    padding: 2rem;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    align-items: center;
-  }
+    align-items: flex-start;
+    margin-bottom: 2rem;
 
-  input {
-    padding: 0.6rem 1.2rem;
+    input {
+      width: 100%;
+      padding: 0.6rem 1.2rem;
+      border: 1px solid #6fb9ff;
+      border-radius: 5px;
+      margin-bottom: 1rem;
+    }
   }
-
   button {
-    font-size: 1rem;
-    padding: 0.6rem 1.2rem;
-    background: palegreen;
-    color: purple;
+    align-self: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    width: 100%;
+    border-radius: 5px;
+    border: 0px;
+    padding: 0.65rem 1.2rem 0.6rem;
+    background: #4ec4fc;
+    color: #375969;
+    cursor: pointer;
+
+    box-shadow: 0 5px 0px 0px #318bb4;
+
+    &:active {
+      transform: translateY(5px);
+      box-shadow: 0px 0px 0px 0px #318bb4;
+    }
+
+    &.toggle {
+      background: white;
+      border: 1px solid #4ec4fc;
+    }
   }
 }

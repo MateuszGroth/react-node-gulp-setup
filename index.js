@@ -103,9 +103,13 @@ app.post("/register", function(req, res) {
       // ! same page for login and register, just 2 different buttons
       res.redirect("/login");
     } else {
-      passport.authenticate("local")(req, res, function() {
-        res.redirect("/");
-      });
+      passport.authenticate("local", { failureRedirect: "/login" })(
+        req,
+        res,
+        function() {
+          res.redirect("/");
+        }
+      );
     }
   });
 });
@@ -115,8 +119,6 @@ app.post("/login", function(req, res) {
     username: req.body.username,
     password: req.body.password
   });
-
-  console.log(user);
 
   req.login(user, function(err) {
     if (err) {
@@ -144,7 +146,7 @@ app.get("/logout", function(req, res) {
 
 app.get("/", function(req, res) {
   if (req.isAuthenticated()) {
-    res.render("index.ejs");
+    res.render("home.ejs");
   } else {
     res.redirect("/login");
   }

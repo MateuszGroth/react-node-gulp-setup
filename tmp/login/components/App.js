@@ -64,6 +64,7 @@ function App() {
   }), _react.default.createElement("button", {
     type: "submit"
   }, "Submit")), _react.default.createElement("button", {
+    className: "toggle",
     onClick: switchAction
-  }, action), ">");
+  }, action));
 }
