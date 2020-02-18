@@ -10,6 +10,12 @@ const source = require("vinyl-source-stream");
 const streamify = require("gulp-streamify");
 
 //browserify for transpiling "imports"
+
+const entryFiles = [
+  { folder: "login", fileName: "index.js" },
+  { folder: "home", fileName: "index.js" }
+];
+
 function reload(done) {
   bSync.reload();
   done();
@@ -36,7 +42,9 @@ gulp.task("compile-js", async () => {
 
   await new Promise((resolve, reject) => {
     stream.on("end", async function() {
-      await bundle();
+      for (let i = 0; i < entryFiles.length; i++) {
+        await bundle(entryFiles[i]);
+      }
       resolve();
     });
   });
@@ -44,13 +52,13 @@ gulp.task("compile-js", async () => {
   return stream;
 });
 
-async function bundle() {
+async function bundle(entryFileObj) {
   const stream = await browserify({
-    entries: "./tmp/index.js",
+    entries: `./tmp/${entryFileObj.folder}/${entryFileObj.fileName}`,
     debug: true
   })
     .bundle()
-    .pipe(source("bundle.js"))
+    .pipe(source(`./${entryFileObj.folder}/${entryFileObj.fileName}`))
     .pipe(streamify(uglify()))
     .pipe(gulp.dest("./public"));
 
@@ -63,12 +71,12 @@ async function bundle() {
 
 gulp.task("sass", () => {
   return gulp
-    .src("./src/style/**/*.scss")
+    .src("./src/**/*.scss")
     .pipe(sourceMaps.init())
     .pipe(sass().on("error", sass.logError))
     .pipe(autoPrefixer())
     .pipe(sourceMaps.write())
-    .pipe(gulp.dest("./public/style"))
+    .pipe(gulp.dest("./public"))
     .pipe(bSync.stream());
 });
 
