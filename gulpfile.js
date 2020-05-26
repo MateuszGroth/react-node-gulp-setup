@@ -4,7 +4,8 @@ const sass = require("gulp-sass");
 const sourceMaps = require("gulp-sourcemaps");
 const autoPrefixer = require("gulp-autoprefixer");
 const babel = require("gulp-babel");
-const uglify = require("gulp-uglify");
+// const uglify = require("gulp-uglify");
+const terser = require("gulp-uglify");
 const browserify = require("browserify");
 const source = require("vinyl-source-stream");
 const streamify = require("gulp-streamify");
@@ -13,7 +14,7 @@ const streamify = require("gulp-streamify");
 
 const entryFiles = [
   { folder: "login", fileName: "index.js" },
-  { folder: "home", fileName: "index.js" }
+  { folder: "home", fileName: "index.js" },
 ];
 
 function reload(done) {
@@ -31,17 +32,17 @@ gulp.task("compile-js", async () => {
             "@babel/preset-env",
             {
               useBuiltIns: "usage",
-              corejs: "2"
-            }
+              corejs: "2",
+            },
           ],
-          "@babel/preset-react"
-        ]
+          "@babel/preset-react",
+        ],
       })
     )
     .pipe(gulp.dest("./tmp"));
 
   await new Promise((resolve, reject) => {
-    stream.on("end", async function() {
+    stream.on("end", async function () {
       for (let i = 0; i < entryFiles.length; i++) {
         await bundle(entryFiles[i]);
       }
@@ -55,15 +56,16 @@ gulp.task("compile-js", async () => {
 async function bundle(entryFileObj) {
   const stream = await browserify({
     entries: `./tmp/${entryFileObj.folder}/${entryFileObj.fileName}`,
-    debug: true
+    debug: true,
   })
     .bundle()
     .pipe(source(`./${entryFileObj.folder}/${entryFileObj.fileName}`))
-    .pipe(streamify(uglify()))
+    //.pipe(streamify(uglify()))
+    .pipe(streamify(terser()))
     .pipe(gulp.dest("./public"));
 
-  return new Promise(resolve => {
-    stream.on("end", function() {
+  return new Promise((resolve) => {
+    stream.on("end", function () {
       resolve();
     });
   });
@@ -83,7 +85,7 @@ gulp.task("sass", () => {
 gulp.task("serve", () => {
   bSync({
     // port: 3001,
-    proxy: "localhost:3000"
+    proxy: "localhost:3000",
   });
 
   gulp.watch("./public/**/*.js", gulp.series(reload));
@@ -92,6 +94,6 @@ gulp.task("serve", () => {
   gulp.watch("./src/**/*.scss", gulp.series("sass"));
 });
 
-gulp.task("default", gulp.parallel("serve"), done => {
+gulp.task("default", gulp.parallel("serve"), (done) => {
   done();
 });
